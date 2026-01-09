@@ -6,12 +6,9 @@
 body {
   margin: 0;
   background: linear-gradient(180deg, #0f1115, #1b1e25);
-  color: #eaeaea;
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .screen {
   height: 100vh;
@@ -22,21 +19,10 @@ body {
 
 .login-card {
   background: #1f222b;
-  padding: 32px;
+  padding: 30px;
   border-radius: 14px;
   width: 320px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(0,0,0,0.7);
-}
-
-.login-card h1 {
-  margin-bottom: 4px;
-}
-
-.login-card h2 {
-  margin-top: 0;
-  font-weight: normal;
-  color: #c9c9c9;
 }
 
 .login-card input {
@@ -48,23 +34,8 @@ body {
 }
 
 .login-card button {
-  margin-top: 10px;
-  padding: 10px;
   width: 100%;
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  background: #3a3f55;
-  color: white;
-}
-
-.login-card button:hover {
-  background: #4a5070;
-}
-
-#loginError {
-  margin-top: 8px;
-  color: #ff6b6b;
+  padding: 10px;
 }
 
 header {
@@ -75,12 +46,36 @@ header {
   align-items: center;
 }
 
+header h1 { color: #fff; }
+
+nav button {
+  margin-left: 5px;
+}
+
 .paper {
   max-width: 900px;
-  margin: 30px auto;
+  margin: 20px auto;
   background: #f2f2e9;
-  color: #222;
-  padding: 30px;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+.paper h2 { margin-top: 0; }
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+}
+
+.card {
+  background: #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
   border-radius: 10px;
   box-shadow: 0 0 40px rgba(0,0,0,0.6);
 }
