@@ -1,12 +1,12 @@
 * {
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #0d0f14, #1b1e26);
-  color: #111;
+  background: #0e1016;
+  color: #eee;
 }
 
 .page {
@@ -20,88 +20,73 @@ body {
   align-items: center;
 }
 
-.login-card {
-  background: #1f222b;
-  padding: 35px;
-  border-radius: 16px;
-  width: 340px;
+.login-box {
+  background: #1c1f2a;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 0 40px rgba(0,0,0,.6);
 }
 
-.login-card input {
+.login-box input {
   width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
   border: none;
 }
 
-.login-card button {
+.login-box button {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 10px;
+  background: #4b6cff;
   border: none;
-  background: #3a5cff;
+  border-radius: 6px;
   color: white;
   cursor: pointer;
 }
 
-.error {
-  color: #ff6b6b;
-}
-
 header {
   width: 100%;
-  background: #14161c;
-  padding: 12px 20px;
+  background: #151821;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-header h1 {
-  color: #fff;
-}
-
 nav button {
   margin-left: 6px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: none;
+  padding: 6px 10px;
   cursor: pointer;
+}
+
+main {
+  padding: 20px;
+  width: 100%;
 }
 
 .tab {
   display: none;
-  width: 100%;
 }
 
 .tab.active {
   display: block;
 }
 
-.paper {
-  max-width: 900px;
-  margin: 30px auto;
-  background: #f4f3eb;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 40px rgba(0,0,0,.5);
+input, textarea, select {
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
 }
 
-.paper input,
-.paper textarea,
-.paper select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+button {
+  margin-top: 10px;
 }
 
 .card {
-  background: #ddd;
+  background: #2a2e3d;
   padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
 }
