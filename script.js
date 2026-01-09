@@ -1,66 +1,77 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
 
-// 🔥 CONFIG FIREBASE (SEU)
-const firebaseConfig = {
-  apiKey: "AIzaSyAg47iuhmvXmJ_SHxp7k2aUg20wZI4_RHo",
-  authDomain: "fronteira-rpg-77819.firebaseapp.com",
-  projectId: "fronteira-rpg-77819"
-};
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0f1115, #1b1e25);
+}
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+.hidden { display: none; }
 
-// ELEMENTOS
-const loginScreen = document.getElementById("login-screen");
-const appScreen = document.getElementById("app");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const loginError = document.getElementById("loginError");
+.screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-// LOGIN / CADASTRO
-loginBtn.addEventListener("click", async () => {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
+.login-card {
+  background: #1f222b;
+  padding: 30px;
+  border-radius: 14px;
+  width: 320px;
+  text-align: center;
+}
 
-  loginError.textContent = "";
+.login-card input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
 
-  if (!email || !password) {
-    loginError.textContent = "Preencha email e senha.";
-    return;
-  }
+.login-card button {
+  width: 100%;
+  padding: 10px;
+}
 
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (e) {
-      loginError.textContent = e.message;
-    }
-  }
-});
+header {
+  background: #14161c;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-// LOGOUT
-logoutBtn.addEventListener("click", () => {
-  signOut(auth);
-});
+header h1 { color: #fff; }
 
-// ESTADO DE LOGIN
-onAuthStateChanged(auth, user => {
-  if (user) {
-    loginScreen.classList.add("hidden");
-    appScreen.classList.remove("hidden");
-  } else {
-    loginScreen.classList.remove("hidden");
-    appScreen.classList.add("hidden");
-  }
-});
+nav button {
+  margin-left: 5px;
+}
+
+.paper {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #f2f2e9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+.paper h2 { margin-top: 0; }
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+}
+
+.card {
+  background: #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
