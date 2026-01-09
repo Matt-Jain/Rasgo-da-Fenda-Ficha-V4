@@ -5,13 +5,16 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #0f1115, #1b1e25);
+  background: linear-gradient(180deg, #0d0f14, #1b1e26);
+  color: #111;
 }
 
-.hidden { display: none; }
+.page {
+  display: none;
+  min-height: 100vh;
+}
 
-.screen {
-  height: 100vh;
+.page.active {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,26 +22,38 @@ body {
 
 .login-card {
   background: #1f222b;
-  padding: 30px;
-  border-radius: 14px;
-  width: 320px;
+  padding: 35px;
+  border-radius: 16px;
+  width: 340px;
   text-align: center;
+  color: #fff;
+  box-shadow: 0 0 40px rgba(0,0,0,.6);
 }
 
 .login-card input {
   width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 6px;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
 }
 
 .login-card button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #3a5cff;
+  color: white;
+  cursor: pointer;
+}
+
+.error {
+  color: #ff6b6b;
 }
 
 header {
+  width: 100%;
   background: #14161c;
   padding: 12px 20px;
   display: flex;
@@ -46,36 +61,47 @@ header {
   align-items: center;
 }
 
-header h1 { color: #fff; }
+header h1 {
+  color: #fff;
+}
 
 nav button {
-  margin-left: 5px;
+  margin-left: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.tab {
+  display: none;
+  width: 100%;
+}
+
+.tab.active {
+  display: block;
 }
 
 .paper {
   max-width: 900px;
-  margin: 20px auto;
-  background: #f2f2e9;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  margin: 30px auto;
+  background: #f4f3eb;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0,0,0,.5);
 }
 
-.paper h2 { margin-top: 0; }
-
-input, textarea, select {
+.paper input,
+.paper textarea,
+.paper select {
   width: 100%;
-  padding: 8px;
-  margin: 6px 0;
+  padding: 10px;
+  margin: 8px 0;
 }
 
 .card {
   background: #ddd;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 8px;
-}
-
-  border-radius: 10px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
 }
