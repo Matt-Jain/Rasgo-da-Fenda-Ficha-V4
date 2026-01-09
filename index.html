@@ -2,85 +2,79 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Rasgo da Fenda — Aegis</title>
+  <title>Aegis — O Despertar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
-<section id="login-page" class="page active">
-  <div class="login-card">
-    <h1>FICHA DE PERSONAGEM</h1>
-    <h2>RASGO DA FENDA</h2>
+<!-- LOGIN -->
+<section id="loginPage" class="page active">
+  <div class="login-box">
+    <h1>RASGO DA FENDA</h1>
     <p>Aegis — O Despertar</p>
 
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Senha">
-    <button id="loginBtn">Entrar / Cadastrar</button>
+    <input type="text" id="loginUser" placeholder="Usuário">
+    <input type="password" id="loginPass" placeholder="Senha">
 
-    <p id="loginError" class="error"></p>
+    <button id="loginBtn">Entrar</button>
   </div>
 </section>
 
-<!-- APP PAGE -->
-<section id="app-page" class="page">
+<!-- APP -->
+<section id="appPage" class="page">
   <header>
-    <h1>Rasgo da Fenda</h1>
+    <h2>Rasgo da Fenda</h2>
     <nav>
-      <button data-tab="create">Criar</button>
-      <button data-tab="characters">Personagens</button>
+      <button data-tab="criar">Criar</button>
+      <button data-tab="personagens">Personagens</button>
       <button data-tab="npcs">NPCs</button>
       <button data-tab="dados">Dados</button>
       <button id="logoutBtn">Sair</button>
     </nav>
   </header>
 
-  <!-- CRIAR -->
-  <section id="create" class="tab active">
-    <div class="paper">
-      <h2>Criar Personagem / NPC</h2>
+  <main>
+    <!-- CRIAR -->
+    <section id="criar" class="tab active">
+      <h3>Criar Personagem / NPC</h3>
 
-      <select id="charType">
-        <option value="player">Player</option>
+      <select id="tipo">
+        <option value="personagem">Personagem</option>
         <option value="npc">NPC</option>
       </select>
 
-      <input id="charName" placeholder="Nome do personagem">
-      <input id="playerName" placeholder="Nome do jogador">
-      <textarea id="appearance" placeholder="Aparência"></textarea>
-      <textarea id="history" placeholder="História"></textarea>
-      <textarea id="goals" placeholder="Ambições"></textarea>
+      <input id="nome" placeholder="Nome">
+      <input id="jogador" placeholder="Jogador">
+      <textarea id="aparencia" placeholder="Aparência"></textarea>
+      <textarea id="historia" placeholder="História"></textarea>
 
-      <button id="saveCharBtn">Salvar</button>
-    </div>
-  </section>
+      <button id="salvar">Salvar</button>
+    </section>
 
-  <!-- PERSONAGENS -->
-  <section id="characters" class="tab">
-    <div class="paper">
-      <h2>Personagens</h2>
-      <div id="playerList"></div>
-    </div>
-  </section>
+    <!-- PERSONAGENS -->
+    <section id="personagens" class="tab">
+      <h3>Personagens</h3>
+      <div id="listaPersonagens"></div>
+    </section>
 
-  <!-- NPCs -->
-  <section id="npcs" class="tab">
-    <div class="paper">
-      <h2>NPCs</h2>
-      <div id="npcList"></div>
-    </div>
-  </section>
+    <!-- NPCS -->
+    <section id="npcs" class="tab">
+      <h3>NPCs</h3>
+      <div id="listaNPCs"></div>
+    </section>
 
-  <!-- DADOS -->
-  <section id="dados" class="tab">
-    <div class="paper">
-      <h2>Dados</h2>
-      <p>Selecione um personagem para rolar dados (em breve).</p>
-    </div>
-  </section>
+    <!-- DADOS -->
+    <section id="dados" class="tab">
+      <h3>Dados</h3>
+      <button onclick="rolarDado(6)">D6</button>
+      <button onclick="rolarDado(20)">D20</button>
+      <p id="resultadoDado"></p>
+    </section>
+  </main>
 </section>
 
-<script type="module" src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+
