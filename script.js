@@ -13,7 +13,7 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* FIREBASE CONFIG */
+/* FIREBASE */
 const firebaseConfig = {
   apiKey: "AIzaSyAg47iuhmvXmJ_SHxp7k2aUg20wZI4_RHo",
   authDomain: "fronteira-rpg-77819.firebaseapp.com",
@@ -24,78 +24,70 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* ELEMENTOS */
-const loginScreen = document.getElementById("login-screen");
-const appScreen = document.getElementById("app");
+/* PAGES */
+const loginPage = document.getElementById("login-page");
+const appPage = document.getElementById("app-page");
 
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+/* LOGIN */
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
 const loginError = document.getElementById("loginError");
+const logoutBtn = document.getElementById("logoutBtn");
 
+/* CREATE */
 const charType = document.getElementById("charType");
 const charName = document.getElementById("charName");
 const playerName = document.getElementById("playerName");
 const appearance = document.getElementById("appearance");
 const history = document.getElementById("history");
 const goals = document.getElementById("goals");
+const saveBtn = document.getElementById("saveCharBtn");
 
+/* LISTS */
 const playerList = document.getElementById("playerList");
 const npcList = document.getElementById("npcList");
 
-/* LOGIN */
-loginBtn.addEventListener("click", async () => {
+/* LOGIN ACTION */
+loginBtn.onclick = async () => {
   loginError.textContent = "";
-
-  if (!emailInput.value || !passwordInput.value) {
-    loginError.textContent = "Preencha email e senha.";
-    return;
-  }
-
   try {
-    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
-  } catch (err) {
-    if (err.code === "auth/user-not-found") {
-      try {
-        await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
-      } catch (e) {
-        loginError.textContent = e.message;
-      }
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+  } catch (e) {
+    if (e.code === "auth/user-not-found") {
+      await createUserWithEmailAndPassword(auth, email.value, password.value);
     } else {
-      loginError.textContent = err.message;
+      loginError.textContent = e.message;
     }
   }
-});
-
-/* LOGOUT */
-logoutBtn.addEventListener("click", () => signOut(auth));
+};
 
 /* AUTH STATE */
 onAuthStateChanged(auth, user => {
   if (user) {
-    loginScreen.classList.add("hidden");
-    appScreen.classList.remove("hidden");
-    showTab("create");
+    loginPage.classList.remove("active");
+    appPage.classList.add("active");
     loadCharacters();
   } else {
-    loginScreen.classList.remove("hidden");
-    appScreen.classList.add("hidden");
+    loginPage.classList.add("active");
+    appPage.classList.remove("active");
   }
 });
 
-/* TABS */
-window.showTab = id => {
-  document.querySelectorAll(".tab").forEach(t => t.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-};
+/* LOGOUT */
+logoutBtn.onclick = () => signOut(auth);
 
-/* SALVAR */
-window.saveCharacter = async () => {
-  if (!charName.value) {
-    alert("Nome do personagem é obrigatório.");
-    return;
-  }
+/* TABS */
+document.querySelectorAll("nav button[data-tab]").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  };
+});
+
+/* SAVE CHARACTER */
+saveBtn.onclick = async () => {
+  if (!charName.value) return alert("Nome obrigatório");
 
   await addDoc(collection(db, "characters"), {
     uid: auth.currentUser.uid,
@@ -108,25 +100,26 @@ window.saveCharacter = async () => {
     created: Date.now()
   });
 
-  alert("Personagem salvo!");
+  alert("Salvo!");
   loadCharacters();
 };
 
-/* LISTAR */
+/* LOAD */
 async function loadCharacters() {
   playerList.innerHTML = "";
   npcList.innerHTML = "";
 
   const snap = await getDocs(collection(db, "characters"));
-  snap.forEach(doc => {
-    const c = doc.data();
+  snap.forEach(d => {
+    const c = d.data();
     if (c.uid !== auth.currentUser.uid) return;
 
     const div = document.createElement("div");
     div.className = "card";
-    div.innerHTML = `<strong>${c.name}</strong>`;
+    div.textContent = c.name;
 
     if (c.type === "npc") npcList.appendChild(div);
     else playerList.appendChild(div);
   });
 }
+
