@@ -1,77 +1,96 @@
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-body {
-  margin: 0;
-  background: linear-gradient(180deg, #0f1115, #1b1e25);
-}
+const firebaseConfig = {
+  apiKey: "AIzaSyAg47iuhmvXmJ_SHxp7k2aUg20wZI4_RHo",
+  authDomain: "fronteira-rpg-77819.firebaseapp.com",
+  projectId: "fronteira-rpg-77819"
+};
 
-.hidden { display: none; }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-.screen {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// ELEMENTOS
+const loginScreen = document.getElementById("login-screen");
+const appScreen = document.getElementById("app");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const loginError = document.getElementById("loginError");
 
-.login-card {
-  background: #1f222b;
-  padding: 30px;
-  border-radius: 14px;
-  width: 320px;
-  text-align: center;
-}
+// LOGIN
+loginBtn.onclick = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+  } catch {
+    await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+  }
+};
 
-.login-card input {
-  width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-}
+logoutBtn.onclick = () => signOut(auth);
 
-.login-card button {
-  width: 100%;
-  padding: 10px;
-}
+onAuthStateChanged(auth, user => {
+  if (user) {
+    loginScreen.classList.add("hidden");
+    appScreen.classList.remove("hidden");
+    loadCharacters();
+  } else {
+    loginScreen.classList.remove("hidden");
+    appScreen.classList.add("hidden");
+  }
+});
 
-header {
-  background: #14161c;
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+// TABS
+window.showTab = id => {
+  document.querySelectorAll(".tab").forEach(t => t.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+};
 
-header h1 { color: #fff; }
+// SALVAR PERSONAGEM / NPC
+window.saveCharacter = async () => {
+  await addDoc(collection(db, "characters"), {
+    uid: auth.currentUser.uid,
+    type: charType.value,
+    name: charName.value,
+    player: playerName.value,
+    appearance: appearance.value,
+    history: history.value,
+    goals: goals.value,
+    created: Date.now()
+  });
+  loadCharacters();
+  alert("Salvo!");
+};
 
-nav button {
-  margin-left: 5px;
-}
+// LISTAR
+async function loadCharacters() {
+  playerList.innerHTML = "";
+  npcList.innerHTML = "";
 
-.paper {
-  max-width: 900px;
-  margin: 20px auto;
-  background: #f2f2e9;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
-}
+  const snap = await getDocs(collection(db, "characters"));
+  snap.forEach(doc => {
+    const c = doc.data();
+    if (c.uid !== auth.currentUser.uid) return;
 
-.paper h2 { margin-top: 0; }
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `<strong>${c.name}</strong>`;
 
-input, textarea, select {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0;
-}
-
-.card {
-  background: #ddd;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 8px;
+    if (c.type === "npc") npcList.appendChild(div);
+    else playerList.appendChild(div);
+  });
 }
