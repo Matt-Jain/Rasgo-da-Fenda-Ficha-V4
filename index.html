@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login-screen" class="screen">
+<!-- LOGIN PAGE -->
+<section id="login-page" class="page active">
   <div class="login-card">
     <h1>FICHA DE PERSONAGEM</h1>
     <h2>RASGO DA FENDA</h2>
@@ -17,27 +17,27 @@
 
     <input id="email" type="email" placeholder="Email">
     <input id="password" type="password" placeholder="Senha">
-
     <button id="loginBtn">Entrar / Cadastrar</button>
-    <p id="loginError"></p>
+
+    <p id="loginError" class="error"></p>
   </div>
-</div>
+</section>
 
-<!-- APP -->
-<div id="app" class="hidden">
-
+<!-- APP PAGE -->
+<section id="app-page" class="page">
   <header>
     <h1>Rasgo da Fenda</h1>
     <nav>
-      <button onclick="showTab('create')">Criar</button>
-      <button onclick="showTab('characters')">Personagens</button>
-      <button onclick="showTab('npcs')">NPCs</button>
+      <button data-tab="create">Criar</button>
+      <button data-tab="characters">Personagens</button>
+      <button data-tab="npcs">NPCs</button>
+      <button data-tab="dados">Dados</button>
       <button id="logoutBtn">Sair</button>
     </nav>
   </header>
 
   <!-- CRIAR -->
-  <section id="create" class="tab">
+  <section id="create" class="tab active">
     <div class="paper">
       <h2>Criar Personagem / NPC</h2>
 
@@ -47,17 +47,17 @@
       </select>
 
       <input id="charName" placeholder="Nome do personagem">
-      <input id="playerName" placeholder="Nome do jogador (NPC pode deixar vazio)">
+      <input id="playerName" placeholder="Nome do jogador">
       <textarea id="appearance" placeholder="Aparência"></textarea>
       <textarea id="history" placeholder="História"></textarea>
       <textarea id="goals" placeholder="Ambições"></textarea>
 
-      <button onclick="saveCharacter()">Salvar</button>
+      <button id="saveCharBtn">Salvar</button>
     </div>
   </section>
 
   <!-- PERSONAGENS -->
-  <section id="characters" class="tab hidden">
+  <section id="characters" class="tab">
     <div class="paper">
       <h2>Personagens</h2>
       <div id="playerList"></div>
@@ -65,14 +65,21 @@
   </section>
 
   <!-- NPCs -->
-  <section id="npcs" class="tab hidden">
+  <section id="npcs" class="tab">
     <div class="paper">
       <h2>NPCs</h2>
       <div id="npcList"></div>
     </div>
   </section>
 
-</div>
+  <!-- DADOS -->
+  <section id="dados" class="tab">
+    <div class="paper">
+      <h2>Dados</h2>
+      <p>Selecione um personagem para rolar dados (em breve).</p>
+    </div>
+  </section>
+</section>
 
 <script type="module" src="script.js"></script>
 </body>
