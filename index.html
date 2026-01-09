@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="login-screen" class="screen">
   <div class="login-card">
     <h1>FICHA DE PERSONAGEM</h1>
@@ -22,17 +23,55 @@
   </div>
 </div>
 
+<!-- APP -->
 <div id="app" class="hidden">
+
   <header>
     <h1>Rasgo da Fenda</h1>
-    <button id="logoutBtn">Sair</button>
+    <nav>
+      <button onclick="showTab('create')">Criar</button>
+      <button onclick="showTab('characters')">Personagens</button>
+      <button onclick="showTab('npcs')">NPCs</button>
+      <button id="logoutBtn">Sair</button>
+    </nav>
   </header>
 
-  <main class="paper">
-    <h2>Login realizado com sucesso</h2>
-    <p>Base da V4 funcionando.</p>
-    <p>Próximo passo: personagens.</p>
-  </main>
+  <!-- CRIAR -->
+  <section id="create" class="tab">
+    <div class="paper">
+      <h2>Criar Personagem / NPC</h2>
+
+      <select id="charType">
+        <option value="player">Player</option>
+        <option value="npc">NPC</option>
+      </select>
+
+      <input id="charName" placeholder="Nome do personagem">
+      <input id="playerName" placeholder="Nome do jogador (NPC pode deixar vazio)">
+      <textarea id="appearance" placeholder="Aparência"></textarea>
+      <textarea id="history" placeholder="História"></textarea>
+      <textarea id="goals" placeholder="Ambições"></textarea>
+
+      <button onclick="saveCharacter()">Salvar</button>
+    </div>
+  </section>
+
+  <!-- PERSONAGENS -->
+  <section id="characters" class="tab hidden">
+    <div class="paper">
+      <h2>Personagens</h2>
+      <div id="playerList"></div>
+    </div>
+  </section>
+
+  <!-- NPCs -->
+  <section id="npcs" class="tab hidden">
+    <div class="paper">
+      <h2>NPCs</h2>
+      <div id="npcList"></div>
+    </div>
+  </section>
+
 </div>
 
 <script type="module" src="script.js"></script>
